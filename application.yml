@@ -1,13 +1,5 @@
 spring:
   profiles: dev
-  cloud:
-    config:
-      use-legacy-processing: true
-      enabled: false
-      import-check.enabled: false
-      import: optional:configserver
-  application:
-    name: outh2_WebClient
   security:
     oauth2:
       client:
@@ -19,16 +11,12 @@ spring:
             client-id: '${CLIENT_ID}'
             client-secret: '${CLIENT_SECRET}'
             authorization-grant-type: client_credential
-
-
 amadeus:
   base: 'https://test.api.amadeus.com/'
   airport-and-city-endpoint: 'v1/reference-data/locations?subType=CITY,AIRPORT&keyword='
   flight-offers-endpoint: 'v2/shopping/flight-offers'
   max-number-of-flights: '10'
 
-
-  
 logging:
   level:
     com.atombooking.flightsapi: DEBUG
@@ -37,8 +25,41 @@ logging:
   pattern:
     file: '%d{HH:mm:ss.SSS} | uuid: %X{request-uuid} , consumer: %X{consumer-name} | [%thread] %-5level %logger{36} - %msg%n'
     
-    
 atombooking:
   open-api-spec:
     dev-url: http://localhost:8080
     prod-url: http://localhost:8080
+
+
+---
+spring:
+  profiles: prod
+  security:
+    oauth2:
+      client:
+        provider:
+          authProvider:
+            token-uri: 'https://api.amadeus.com/v1/security/oauth2/token'
+        registration:
+          authProvider:
+            client-id: '${CLIENT_ID}'
+            client-secret: '${CLIENT_SECRET}'
+            authorization-grant-type: client_credential
+amadeus:
+  base: 'https://api.amadeus.com/'
+  airport-and-city-endpoint: 'v1/reference-data/locations?subType=CITY,AIRPORT&keyword='
+  flight-offers-endpoint: 'v2/shopping/flight-offers'
+  max-number-of-flights: '50'
+  
+logging:
+  level:
+    com.atombooking.flightsapi: INFO
+  file:
+    path: C:\Users\ammad\logs
+  pattern:
+    file: '%d{HH:mm:ss.SSS} | uuid: %X{request-uuid} , consumer: %X{consumer-name} | [%thread] %-5level %logger{36} - %msg%n'
+    
+atombooking:
+  open-api-spec:
+    dev-url: http://localhost:8080
+    prod-url: http://atombooking.com
