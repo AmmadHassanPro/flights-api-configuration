@@ -20,8 +20,6 @@ amadeus:
 logging:
   level:
     com.atombooking.flightsapi: DEBUG
-  file:
-    path: C:\Users\ammad\logs
   pattern:
     file: '%d{HH:mm:ss.SSS} | uuid: %X{request-uuid} , consumer: %X{consumer-name} | [%thread] %-5level %logger{36} - %msg%n'
     
@@ -54,8 +52,6 @@ amadeus:
 logging:
   level:
     com.atombooking.flightsapi: INFO
-  file:
-    path: C:\Users\ammad\logs
   pattern:
     file: '%d{HH:mm:ss.SSS} | uuid: %X{request-uuid} , consumer: %X{consumer-name} | [%thread] %-5level %logger{36} - %msg%n'
     
