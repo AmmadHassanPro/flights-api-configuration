@@ -37,7 +37,7 @@ atombooking:
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: prod
   security:
     oauth2:
       client:
